@@ -75,6 +75,13 @@ const Navbar = () => {
                                 <Typography className='lines' component={'img'} src={line} sx={{ display: 'none', mr: 1 }}></Typography>
                                 <Typography className='navItem'>Gallery</Typography>
                             </MenuItem>
+                            <MenuItem
+                                onClick={() => navigate('/inquiry')}
+                                sx={getItemStyles(isActiveRoute('/inquiry'))}
+                            >
+                                <Typography className='lines' component={'img'} src={line} sx={{ display: 'none', mr: 1 }}></Typography>
+                                <Typography className='navItem'>Inquiry</Typography>
+                            </MenuItem>
                         </Box>
                         <Box sx={{ display: { sm: 'none', xs: 'flex' }, justifyContent: 'end' }}>
                             <IconButton onClick={toggleSidebar} sx={{ color: '#294462' }}>
@@ -102,6 +109,10 @@ const Navbar = () => {
                                     <MenuItem onClick={() => closeSidebarAndNavigate('/gallery')} sx={getSidebarItemStyles(isActiveRoute('/gallery'))}>
                                         <CollectionsIcon />
                                         <Typography>Gallery</Typography>
+                                    </MenuItem>
+                                    <MenuItem onClick={() => closeSidebarAndNavigate('/inquiry')} sx={getSidebarItemStyles(isActiveRoute('/inquiry'))}>
+                                        <CollectionsIcon />
+                                        <Typography>Inquiry</Typography>
                                     </MenuItem>
                                 </Box>
                             </Box>

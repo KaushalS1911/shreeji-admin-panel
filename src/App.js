@@ -8,6 +8,7 @@ import OurProducts from './pages/OurProducts';
 import Gallery from './pages/Gallery';
 import FormGallery from './FormGallery';
 import ProductionBlogs from './pages/ProductionBlogs';
+import Inquiry from "./components/inquiry/Inquiry";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/add-gallery' element={<FormGallery />} />
         <Route path='/add-gallery/:id' element={<FormGallery />} />
         <Route path='/productionBlogs' element={<ProductionBlogs />} />
+        <Route path='/inquiry' element={<Inquiry />} />
       </Routes>
     </>
   );
