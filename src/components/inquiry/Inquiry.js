@@ -17,6 +17,8 @@ function Inquiry() {
 
     return (
         <Container maxWidth="md" sx={{ marginTop: 4 }}>
+
+
             <Typography variant="h4" component="h1" gutterBottom>
                 Inquiry List
             </Typography>
