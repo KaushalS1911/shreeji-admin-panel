@@ -18,6 +18,13 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import line from "./assets/images/global/line.png";
 
+const countries = [
+    { code: 'IN', name: 'India' },
+    { code: 'US', name: 'United States' },
+    { code: 'GB', name: 'United Kingdom' },
+    // Add more countries...
+];
+
 const FromPrd = () => {
     const [single, setSingle] = useState({});
     const { id } = useParams();
@@ -26,6 +33,10 @@ const FromPrd = () => {
     const [thumbnailPreview, setThumbnailPreview] = useState(null);
     const [loading, setLoading] = useState(false);
     const [category, setCategory] = useState(""); // Category field
+    const [country, setCountry] = useState(""); // Country field
+    const [shelfLife, setShelfLife] = useState(""); // Shelf Life field
+    const [packagingType, setPackagingType] = useState(""); // Packaging Type field
+    const [preferredBuyerLocation, setPreferredBuyerLocation] = useState(""); // Preferred Buyer Location field
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -40,13 +51,18 @@ const FromPrd = () => {
             setThumbnail(single.image || null);
             setThumbnailPreview(single.image || null);
             setCategory(single.category || "");
+            // Set other fields if available in the single product data
+            setCountry(single.description?.country || "");
+            setShelfLife(single.description?.shelfLife || "");
+            setPackagingType(single.description?.packagingType || "");
+            setPreferredBuyerLocation(single.description?.preferredBuyerLocation || "");
         }
     }, [single]);
 
     const getSingleData = () => {
         axios
             .get(`https://shreeji-be.onrender.com/api/product/${id}`)
-            .then((res) => setSingle(res.data.data))
+            .then((res) => setSingle({...res.data.data,description: JSON.parse(res.data.data.description)}))
             .catch((err) => console.log(err));
     };
 
@@ -69,6 +85,18 @@ const FromPrd = () => {
         formData.append("title", title);
         formData.append("product-image", thumbnail);
         formData.append("category", category);
+
+        // Create the description object
+        const description = {
+            country,
+            shelfLife,
+            packagingType,
+            preferredBuyerLocation,
+        };
+
+        // Append the description object as JSON
+        formData.append("description", JSON.stringify(description));
+
         if (id) {
             axios.put(`https://shreeji-be.onrender.com/api/product/${id}`, formData, {
                 headers: {
@@ -84,9 +112,7 @@ const FromPrd = () => {
                     console.log(err);
                     setLoading(false);
                 });
-        }
-        else {
-
+        } else {
             axios
                 .post("https://shreeji-be.onrender.com/api/product", formData, {
                     headers: {
@@ -219,6 +245,52 @@ const FromPrd = () => {
                                     <MenuItem value="Spices">Spices</MenuItem>
                                 </Select>
                             </FormControl>
+
+                            {/* Country Select */}
+                            <FormControl fullWidth>
+                                <InputLabel>Country</InputLabel>
+                                <Select
+                                    value={country}
+                                    onChange={(e) => setCountry(e.target.value)}
+                                    required
+                                >
+                                    {countries.map((country) => (
+                                        <MenuItem key={country.code} value={country.name}>
+                                            {country.name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+
+                            {/* Shelf Life Input */}
+                            <TextField
+                                label="Shelf Life"
+                                variant="outlined"
+                                value={shelfLife}
+                                onChange={(e) => setShelfLife(e.target.value)}
+                                fullWidth
+                                required
+                            />
+
+                            {/* Packaging Type Input */}
+                            <TextField
+                                label="Packaging Type"
+                                variant="outlined"
+                                value={packagingType}
+                                onChange={(e) => setPackagingType(e.target.value)}
+                                fullWidth
+                                required
+                            />
+
+                            {/* Preferred Buyer Location Input */}
+                            <TextField
+                                label="Preferred Buyer Location"
+                                variant="outlined"
+                                value={preferredBuyerLocation}
+                                onChange={(e) => setPreferredBuyerLocation(e.target.value)}
+                                fullWidth
+                                required
+                            />
 
                             {/* Submit Button */}
                             <Button
