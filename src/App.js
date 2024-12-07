@@ -26,6 +26,7 @@ function App() {
         <Route path='/add-gallery/:id' element={<FormGallery />} />
         <Route path='/productionBlogs' element={<ProductionBlogs />} />
         <Route path='/inquiry' element={<Inquiry />} />
+
       </Routes>
     </>
   );
