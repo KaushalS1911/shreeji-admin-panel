@@ -292,6 +292,34 @@ const FromPrd = () => {
                                 required
                             />
 
+                            {/*<TextField*/}
+                            {/*    label="Country"*/}
+                            {/*    variant="outlined"*/}
+                            {/*    value={country}*/}
+                            {/*    onChange={(e) => setPreferredBuyerLocation(e.target.value)}*/}
+                            {/*    fullWidth*/}
+                            {/*    required*/}
+                            {/*/>*/}
+
+                            {/*<TextField*/}
+                            {/*    label="Shelf Life"*/}
+                            {/*    variant="outlined"*/}
+                            {/*    value={shelfLife}*/}
+                            {/*    onChange={(e) => setPreferredBuyerLocation(e.target.value)}*/}
+                            {/*    fullWidth*/}
+                            {/*    required*/}
+                            {/*/>*/}
+
+                            {/*<TextField*/}
+                            {/*    label="Packaging Type"*/}
+                            {/*    variant="outlined"*/}
+                            {/*    value={packagingType}*/}
+                            {/*    onChange={(e) => setPreferredBuyerLocation(e.target.value)}*/}
+                            {/*    fullWidth*/}
+                            {/*    required*/}
+                            {/*/>*/}
+
+
                             {/* Submit Button */}
                             <Button
                                 type="submit"
