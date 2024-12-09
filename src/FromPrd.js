@@ -21,7 +21,13 @@ import line from "./assets/images/global/line.png";
 const countries = [
     { code: 'IN', name: 'India' },
     { code: 'US', name: 'United States' },
-    { code: 'GB', name: 'United Kingdom' },
+    { code: 'UK', name: 'United Kingdom' },
+    { code: 'USA', name: 'United States of America' },
+    { code: 'Canada', name: 'Canada' },
+    { code: 'Europe', name: 'Europe' },
+    { code: 'Middle East', name: 'Middle East' },
+    { code: 'Asia', name: 'Asia' },
+    { code: 'Africa', name: 'Africa' },
     // Add more countries...
 ];
 
@@ -34,9 +40,10 @@ const FromPrd = () => {
     const [loading, setLoading] = useState(false);
     const [category, setCategory] = useState(""); // Category field
     const [country, setCountry] = useState(""); // Country field
-    const [shelfLife, setShelfLife] = useState(""); // Shelf Life field
-    const [packagingType, setPackagingType] = useState(""); // Packaging Type field
-    const [preferredBuyerLocation, setPreferredBuyerLocation] = useState(""); // Preferred Buyer Location field
+    const [varieties, setVarieties] = useState(""); // Varieties field
+    const [certifications, setCertifications] = useState(""); 
+    const [whyChooseUs, setWhyChooseUs] = useState(""); 
+    const [packagingOptions, setPackagingOptions] = useState(""); 
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -53,9 +60,10 @@ const FromPrd = () => {
             setCategory(single.category || "");
             // Set other fields if available in the single product data
             setCountry(single.description?.country || "");
-            setShelfLife(single.description?.shelfLife || "");
-            setPackagingType(single.description?.packagingType || "");
-            setPreferredBuyerLocation(single.description?.preferredBuyerLocation || "");
+            setVarieties(single.description?.varieties || "");
+            setCertifications(single.description?.certifications || "");
+            setWhyChooseUs(single.description?.whyChooseUs || "");
+            setPackagingOptions(single.description?.packagingOptions || "");
         }
     }, [single]);
 
@@ -89,9 +97,10 @@ const FromPrd = () => {
         // Create the description object
         const description = {
             country,
-            shelfLife,
-            packagingType,
-            preferredBuyerLocation,
+            varieties,
+            certifications,
+            whyChooseUs,
+            packagingOptions
         };
 
         // Append the description object as JSON
@@ -262,36 +271,43 @@ const FromPrd = () => {
                                 </Select>
                             </FormControl>
 
-                            {/* Shelf Life Input */}
                             <TextField
-                                label="Shelf Life"
+                                label="Varieties"
                                 variant="outlined"
-                                value={shelfLife}
-                                onChange={(e) => setShelfLife(e.target.value)}
+                                value={varieties}
+                                onChange={(e) => setVarieties(e.target.value)}
                                 fullWidth
                                 required
                             />
 
-                            {/* Packaging Type Input */}
                             <TextField
-                                label="Packaging Type"
+                                label="Certifications"
                                 variant="outlined"
-                                value={packagingType}
-                                onChange={(e) => setPackagingType(e.target.value)}
+                                value={certifications}
+                                onChange={(e) => setCertifications(e.target.value)}
                                 fullWidth
                                 required
                             />
 
-                            {/* Preferred Buyer Location Input */}
+
+
                             <TextField
-                                label="Preferred Buyer Location"
+                                label="Why Choose Us"
                                 variant="outlined"
-                                value={preferredBuyerLocation}
-                                onChange={(e) => setPreferredBuyerLocation(e.target.value)}
+                                value={whyChooseUs}
+                                onChange={(e) => setWhyChooseUs(e.target.value)}
                                 fullWidth
                                 required
                             />
 
+                            <TextField
+                                label="Packaging Options"
+                                variant="outlined"
+                                value={packagingOptions}
+                                onChange={(e) => setPackagingOptions(e.target.value)}
+                                fullWidth
+                                required
+                            />
                             {/*<TextField*/}
                             {/*    label="Country"*/}
                             {/*    variant="outlined"*/}
