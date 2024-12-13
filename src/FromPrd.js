@@ -35,6 +35,7 @@ const FromPrd = () => {
     const [single, setSingle] = useState({});
     const { id } = useParams();
     const [title, setTitle] = useState(""); // Title field
+    const [productDetails, setProductDetails] = useState(""); // Title field
     const [thumbnail, setThumbnail] = useState(null); // Product Image field
     const [thumbnailPreview, setThumbnailPreview] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -44,6 +45,7 @@ const FromPrd = () => {
     const [certifications, setCertifications] = useState(""); 
     const [whyChooseUs, setWhyChooseUs] = useState(""); 
     const [packagingOptions, setPackagingOptions] = useState(""); 
+    const [productDec, setProductDec] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -55,6 +57,7 @@ const FromPrd = () => {
     useEffect(() => {
         if (single) {
             setTitle(single.title || "");
+            setProductDetails(single.productDetails || "");
             setThumbnail(single.image || null);
             setThumbnailPreview(single.image || null);
             setCategory(single.category || "");
@@ -64,6 +67,7 @@ const FromPrd = () => {
             setCertifications(single.description?.certifications || "");
             setWhyChooseUs(single.description?.whyChooseUs || "");
             setPackagingOptions(single.description?.packagingOptions || "");
+            setProductDec(single.description?.productDec || "");
         }
     }, [single]);
 
@@ -96,11 +100,13 @@ const FromPrd = () => {
 
         // Create the description object
         const description = {
+            productDetails,
             country,
             varieties,
             certifications,
             whyChooseUs,
-            packagingOptions
+            packagingOptions,
+            productDec
         };
 
         // Append the description object as JSON
@@ -241,6 +247,15 @@ const FromPrd = () => {
                                 }}
                             />
 
+                            <TextField
+                                label="Product Details:"
+                                variant="outlined"
+                                value={productDetails}
+                                onChange={(e) => setProductDetails(e.target.value)}
+                                fullWidth
+                                required
+                            />
+
                             {/* Category Select */}
                             <FormControl fullWidth>
                                 <InputLabel>Category</InputLabel>
@@ -308,33 +323,15 @@ const FromPrd = () => {
                                 fullWidth
                                 required
                             />
-                            {/*<TextField*/}
-                            {/*    label="Country"*/}
-                            {/*    variant="outlined"*/}
-                            {/*    value={country}*/}
-                            {/*    onChange={(e) => setPreferredBuyerLocation(e.target.value)}*/}
-                            {/*    fullWidth*/}
-                            {/*    required*/}
-                            {/*/>*/}
 
-                            {/*<TextField*/}
-                            {/*    label="Shelf Life"*/}
-                            {/*    variant="outlined"*/}
-                            {/*    value={shelfLife}*/}
-                            {/*    onChange={(e) => setPreferredBuyerLocation(e.target.value)}*/}
-                            {/*    fullWidth*/}
-                            {/*    required*/}
-                            {/*/>*/}
-
-                            {/*<TextField*/}
-                            {/*    label="Packaging Type"*/}
-                            {/*    variant="outlined"*/}
-                            {/*    value={packagingType}*/}
-                            {/*    onChange={(e) => setPreferredBuyerLocation(e.target.value)}*/}
-                            {/*    fullWidth*/}
-                            {/*    required*/}
-                            {/*/>*/}
-
+                            <TextField
+                                label="Product Description:"
+                                variant="outlined"
+                                value={productDec}
+                                onChange={(e) => setProductDec(e.target.value)}
+                                fullWidth
+                                required
+                            />
 
                             {/* Submit Button */}
                             <Button
